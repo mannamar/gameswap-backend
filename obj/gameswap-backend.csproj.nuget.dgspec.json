@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/amardeepmann/Desktop/Codestack/fullstackProject/gameswap-backend/gameswap-backend.csproj": {}
+    "/Users/kennethfujimura/Documents/Code Stack Projects/Fullstack Project/gameswap-backend/gameswap-backend.csproj": {}
   },
   "projects": {
-    "/Users/amardeepmann/Desktop/Codestack/fullstackProject/gameswap-backend/gameswap-backend.csproj": {
+    "/Users/kennethfujimura/Documents/Code Stack Projects/Fullstack Project/gameswap-backend/gameswap-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/amardeepmann/Desktop/Codestack/fullstackProject/gameswap-backend/gameswap-backend.csproj",
+        "projectUniqueName": "/Users/kennethfujimura/Documents/Code Stack Projects/Fullstack Project/gameswap-backend/gameswap-backend.csproj",
         "projectName": "gameswap-backend",
-        "projectPath": "/Users/amardeepmann/Desktop/Codestack/fullstackProject/gameswap-backend/gameswap-backend.csproj",
-        "packagesPath": "/Users/amardeepmann/.nuget/packages/",
-        "outputPath": "/Users/amardeepmann/Desktop/Codestack/fullstackProject/gameswap-backend/obj/",
+        "projectPath": "/Users/kennethfujimura/Documents/Code Stack Projects/Fullstack Project/gameswap-backend/gameswap-backend.csproj",
+        "packagesPath": "/Users/kennethfujimura/.nuget/packages/",
+        "outputPath": "/Users/kennethfujimura/Documents/Code Stack Projects/Fullstack Project/gameswap-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/amardeepmann/.nuget/NuGet/NuGet.Config"
+          "/Users/kennethfujimura/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -38,6 +38,24 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

@@ -7,7 +7,7 @@ namespace gameswap_backend.Models.DTO
 {
     public class PasswordDTO
     {
-        public string Salt { get; set; }
-        public string Hash { get; set; }
+        public string? Salt { get; set; }
+        public string? Hash { get; set; }
     }
 }

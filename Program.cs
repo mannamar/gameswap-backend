@@ -1,11 +1,13 @@
 using gameswap_backend.Services;
 using gameswap_backend.Services.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
 
-var connectionString = builder.ConfigurationString("GameSwapString");
+var connectionString = builder.Configuration.GetConnectionString("GameSwapString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
