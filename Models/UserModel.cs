@@ -13,7 +13,9 @@ namespace gameswap_backend.Models
         public string? Salt { get; set; }
         public string? Hash { get; set; }
         public string? Name { get; set; }
-        public string? Birthdate { get; set; }
+        public string? Birthday { get; set; }
         public int Zip { get; set; }
+        public DateTime CreationTime { get; set; }
+        public bool isDeleted { get; set; }
     }
 }
