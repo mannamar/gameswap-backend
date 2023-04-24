@@ -16,7 +16,7 @@ namespace gameswap_backend.Services
         {
             _context = context;
         }
-        public bool DoesUserExist(string Username)
+        public bool DoesUserExist(string? Username)
         {
             // Check the table to see if the username exists
                 // If one item matches the condition return the item
@@ -39,12 +39,21 @@ namespace gameswap_backend.Services
             if (!DoesUserExist(UserToAdd.Username))
             {
                 UserModel newUser = new UserModel();
-                result = true;
+                // Create salt and hash password
+                var hashPassword = HashPassword(UserToAdd.Password);
+                newUser.Id = UserToAdd.Id;
+                newUser.Username = UserToAdd.Username;
+                newUser.Salt = hashPassword.Salt;
+                newUser.Hash = hashPassword.Hash;
+                // Add newUser to our database
+                _context.Add(newUser);
+                // This saves to our databse and returns the numbers of entries that was written
+                result = _context.SaveChanges() != 0;
             }
             return result;
         }
 
-        public PasswordDTO HashPassword(string password)
+        public PasswordDTO HashPassword(string? password)
         {
             PasswordDTO newHashedPassword = new PasswordDTO();
             byte[] SaltByte = new byte[64];
