@@ -65,5 +65,17 @@ namespace gameswap_backend.Services
 
             return newHashedPassword;
         }
+
+        public bool VerifyUserPassword(string? Password, string? storedHash, string? storedSalt)
+        {
+            // Get our existing salt and change it to a base 64 string
+            var SaltBytes = Convert.FromBase64String(storedSalt);
+            // Making the password that the user inputted and using the stored salt
+            var rfc2898DeriveBytes = new Rfc2898DeriveBytes(Password, SaltBytes, 10000);
+            // Recreate hash based on entered password and stored salt
+            var newHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
+            // Compare if the new hash matches the stored hash
+            return newHash == storedHash;
+        }
     }
 }
