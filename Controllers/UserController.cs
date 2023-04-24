@@ -16,6 +16,10 @@ namespace gameswap_backend.Controllers
         public UserController(UserService data){
             _data = data;
         }
+        
+        //Add a user endpoint
+        [HttpPost]
+        [Route("AddUser")]
         public bool AddUser(CreateAccountDTO UserToAdd){
             return _data.AddUser(UserToAdd);
         }
