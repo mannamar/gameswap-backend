@@ -23,14 +23,24 @@ namespace gameswap_backend.Services
         
         //function that checks the database table to see if the username already exists. If 1 item matches the condition, we wil return that item. If no item matches, we will return 'null'. If mutiple items match, an error will occur and our table is likely busted
         public bool DoesUserExist(string? Username){
-            return _context.UserInfo.SingleOrDefault(user => user.Username == Username) != null;
+            return _context.UserInfo.SingleOrDefault(user => user.Username == Username && !user.isDeleted) != null;
+        }
+
+        public bool DoesEmailExist(string? Email){
+            return _context.UserInfo.SingleOrDefault(user => user.Email == Email && !user.isDeleted) != null;
         }
 
         //function that creates a new user account
-        public bool AddUser(CreateAccountDTO UserToAdd){
-            //check to see if the user exists or not. If they don't, then proceed to account creation
-            bool result = false;
-            if (!DoesUserExist(UserToAdd.Username)) {
+        public string AddUser(CreateAccountDTO UserToAdd){
+            //check to see if the username or email exists or not. If they don't, then proceed to account creation. Else, return an error msg
+            string result = "Success";
+            if (DoesUserExist(UserToAdd.Username) && DoesEmailExist(UserToAdd.Email)) {
+                result = "Username & Email already taken";
+            } else if (DoesEmailExist(UserToAdd.Email)){
+                result = "Email already taken";
+            } else if (DoesUserExist(UserToAdd.Username)){
+                result = "Username already taken";
+            } else {
                 //creating a new, empty instance of a user model for saving the user's account information
                 UserModel newUser = new UserModel();
                 //create our salt and hash password by calling our HashPassword helper function
@@ -54,7 +64,7 @@ namespace gameswap_backend.Services
                 //adding newUser to our databse
                 _context.Add(newUser);
                 //this saves to our database and returns the number of entires that was written to the database. If the returned number is not 0, then it evaluates as true; else false.
-                result = _context.SaveChanges() != 0;
+                _context.SaveChanges();
             }
             //will return true if new user is added; else will return false
             return result;
