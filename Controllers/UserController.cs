@@ -17,6 +17,13 @@ namespace gameswap_backend.Controllers
             _data = data;
         }
         
+        //Login user endpoint
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login([FromBody] LoginDTO User){
+            return _data.Login(User);
+        }
+
         //Add a user endpoint
         [HttpPost]
         [Route("AddUser")]

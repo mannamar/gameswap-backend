@@ -6,10 +6,15 @@ using System.Security.Cryptography;
 using gameswap_backend.Models;
 using gameswap_backend.Models.DTO;
 using gameswap_backend.Services.Context;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using System.Security.Claims;
 
 namespace gameswap_backend.Services
 {
-    public class UserService
+    public class UserService : ControllerBase
     {
         private readonly DataContext _context;
         public UserService(DataContext context){
@@ -86,6 +91,38 @@ namespace gameswap_backend.Services
             var newHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(256));
             //comparing the new hash to see if it matches the old hash to confirm that the password is the same
             return newHash == storedHash;
+        }
+
+        //Function that logs user into website via JWT - Json Web Token - that securely sends data for authentication purposes via encrypted json token
+        public IActionResult Login(LoginDTO User){
+            //Returns an error if an incorrect username or password is inputted
+            IActionResult Result = Unauthorized();
+            
+            //Check to see if user exists
+            if(DoesUserExist(User.Username)){
+                //If user exists, store in foundUser object
+                UserModel foundUser = GetUserByUserName(User.Username);
+                //check if password is correct
+                if(VerifyUserPassword(User.Password, foundUser.Hash, foundUser.Salt)){
+                    var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
+                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    var tokeOptions = new JwtSecurityToken(
+                        issuer: "http://localhost:5000",
+                        audience: "http://localhost:5000",
+                        claims: new List<Claim>(),
+                        expires: DateTime.Now.AddDays(30),
+                        signingCredentials: signinCredentials
+                    );
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                    Result = Ok(new { Token = tokenString });
+                }
+            }
+            return Result;
+        }
+
+        //Helper function to find user in database by username
+        public UserModel GetUserByUserName(string? username){
+            return _context.UserInfo.SingleOrDefault(user => user.Username == username);
         }
     }
 }
