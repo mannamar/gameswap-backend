@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gameswap_backend.Models;
 using gameswap_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,20 @@ namespace gameswap_backend.Controllers
             _data = data;
         }
 
-        //endpoints begin
+        //ENDPOINTS BEGIN:
+        
+        //Endpoint for adding a wish list item
+        [HttpPost]
+        [Route("AddWishListItem")]
+        public bool AddWishListItem(WishListItemModel NewWishListItem){
+            return _data.AddWishListItem(NewWishListItem);
+        }
+
+        //Endpoint for getting all wishlist items by user Id
+        [HttpGet]
+        [Route("GetWishListItemsByUserId/{UserId}")]
+        public IEnumerable<WishListItemModel> GetWishListItemsByUserId(int userId){
+            return _data.GetWishListItemsByUserId(userId);
+        }
     }
 }
