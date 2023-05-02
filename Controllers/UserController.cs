@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gameswap_backend.Models;
 using gameswap_backend.Models.DTO;
 using gameswap_backend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -31,5 +32,17 @@ namespace gameswap_backend.Controllers
             return _data.AddUser(UserToAdd);
         }
         
+        //Update user endpoint - requires information for the ENTIRE user model, including salt & hash - not going to work well for our purposes.
+        // [HttpPost]
+        // [Route("UpdateUser")]
+        // public bool UpdateUser(UserModel userToUpdate){
+        //     return _data.UpdateUser(userToUpdate);
+        // }
+
+        [HttpPost]
+        [Route("UpdateUser/{id}/{username}")]
+        public bool UpdateUsername(int id, string username){
+            return _data.UpdateUsername(id, username);
+        }
     }
 }

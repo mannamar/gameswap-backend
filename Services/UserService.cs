@@ -134,5 +134,32 @@ namespace gameswap_backend.Services
         public UserModel GetUserByUserName(string? username){
             return _context.UserInfo.SingleOrDefault(user => user.Username == username);
         }
+
+        //Function that updates a user's information stored in the database - here for reference, not going to use
+        // public bool UpdateUser(UserModel userToUpdate){
+        //     _context.Update<UserModel>(userToUpdate);
+        //     return _context.SaveChanges() != 0;
+        // }
+
+        //Function to update specific information in each usermodel, specifically just the username. May expand later to update more.
+        public bool UpdateUsername(int id, string username){
+            //This one is sending over just the id and the username. So we have to get the object to then be updated
+            UserModel foundUser = GetUserById(id);
+            bool result = false;
+            //check to see if the user exists; if it does - proceed with rewriting the username
+            if(foundUser != null){
+                if (!DoesUserExist(username)){
+                    foundUser.Username = username;
+                    _context.Update<UserModel>(foundUser);
+                    result = _context.SaveChanges() != 0;
+                }
+            }
+            return result;
+        }
+
+        //Helper function to get the user by id
+        public UserModel GetUserById(int id){
+            return _context.UserInfo.SingleOrDefault(user => user.Id == id);
+        }
     }
 }
