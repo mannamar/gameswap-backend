@@ -7,7 +7,7 @@ namespace gameswap_backend.Models
 {
     public class WishListItemModel
     {
-        public int ItemId { get; set; }
+        public int Id { get; set; }
         public int UserId { get; set; }
         public string? GameName { get; set; }
         public string? GamePlatform { get; set; }

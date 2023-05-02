@@ -17,7 +17,7 @@ namespace gameswap_backend.Services
         //function that creates a new wish list item and saves to the database
         public bool AddWishListItem(WishListItemModel NewWishListItem){
             WishListItemModel newItem = new WishListItemModel();
-            newItem.ItemId = 0;
+            newItem.Id = 0;
             newItem.UserId = NewWishListItem.UserId;
             newItem.GameName = NewWishListItem.GameName;
             newItem.GamePlatform = NewWishListItem.GamePlatform;
