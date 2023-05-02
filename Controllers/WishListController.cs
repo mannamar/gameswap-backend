@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace gameswap_backend.Controllers
 {
     [ApiController]
-    [Route("Controller")]
+    [Route("[controller]")]
 
     public class WishListController : ControllerBase
     {
