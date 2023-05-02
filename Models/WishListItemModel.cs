@@ -17,5 +17,7 @@ namespace gameswap_backend.Models
         public string? TradeOptions { get; set; }
         public bool isComplete { get; set; }
         public bool isDeleted { get; set; }
+
+        public WishListItemModel(){}
     }
 }

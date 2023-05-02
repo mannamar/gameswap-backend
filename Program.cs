@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<WishListService>();
 
 var connectionString = builder.Configuration.GetConnectionString("GameSwapString");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));

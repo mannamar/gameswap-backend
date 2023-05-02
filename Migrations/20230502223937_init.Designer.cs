@@ -11,7 +11,7 @@ using gameswap_backend.Services.Context;
 namespace gameswap_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230502221748_init")]
+    [Migration("20230502223937_init")]
     partial class init
     {
         /// <inheritdoc />
