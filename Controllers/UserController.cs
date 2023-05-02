@@ -39,10 +39,18 @@ namespace gameswap_backend.Controllers
         //     return _data.UpdateUser(userToUpdate);
         // }
 
+        //Update username endpoint - used for only updating the username so as to bypass needing the salt & hash from the above model.
         [HttpPost]
         [Route("UpdateUser/{id}/{username}")]
         public bool UpdateUsername(int id, string username){
             return _data.UpdateUsername(id, username);
+        }
+        
+        //Endpoint to hard delete a user from the user database. Not suggested to use in the website; just for testing purposes.
+        [HttpDelete]
+        [Route("HardDeleteUser/{userToDelete}")]
+        public bool HardDeleteUser(string userToDelete){
+            return _data.HardDeleteUser(userToDelete);
         }
     }
 }

@@ -161,5 +161,18 @@ namespace gameswap_backend.Services
         public UserModel GetUserById(int id){
             return _context.UserInfo.SingleOrDefault(user => user.Id == id);
         }
+
+        //Function to hard delete a user from the user database. Not suggested to use in website; only for testing, admin, and referencing purposes.
+        public bool HardDeleteUser(string userToDelete){
+            //this one is just sending over the username; we have to get the object to be deleted.
+            UserModel foundUser = GetUserByUserName(userToDelete);
+            bool result = false;
+            //if statement to find if the user was found or not. If true, proceed to delete
+            if (foundUser != null){
+                _context.Remove<UserModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }
