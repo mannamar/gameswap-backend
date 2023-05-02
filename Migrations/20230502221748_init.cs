@@ -30,6 +30,27 @@ namespace gameswap_backend.Migrations
                 {
                     table.PrimaryKey("PK_UserInfo", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "WishListItemInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    GameName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GamePlatform = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseYear = table.Column<int>(type: "int", nullable: false),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IgdbId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TradeOptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isComplete = table.Column<bool>(type: "bit", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WishListItemInfo", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -37,6 +58,9 @@ namespace gameswap_backend.Migrations
         {
             migrationBuilder.DropTable(
                 name: "UserInfo");
+
+            migrationBuilder.DropTable(
+                name: "WishListItemInfo");
         }
     }
 }

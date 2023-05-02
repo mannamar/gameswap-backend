@@ -11,7 +11,7 @@ using gameswap_backend.Services.Context;
 namespace gameswap_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230411174057_init")]
+    [Migration("20230502221748_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -62,6 +62,46 @@ namespace gameswap_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserInfo");
+                });
+
+            modelBuilder.Entity("gameswap_backend.Models.WishListItemModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("GameName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GamePlatform")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IgdbId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReleaseYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TradeOptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WishListItemInfo");
                 });
 #pragma warning restore 612, 618
         }
