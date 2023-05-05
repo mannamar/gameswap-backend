@@ -52,5 +52,12 @@ namespace gameswap_backend.Controllers
         public bool HardDeleteUser(string userToDelete){
             return _data.HardDeleteUser(userToDelete);
         }
+
+        //Endpoint that soft deletes a user so that they don't appear on the front end, but are still archived in the tables for reference.
+        [HttpPost]
+        [Route("DeleteUser/{userToDelete}")]
+        public bool DeleteUser(string username){
+            return _data.HardDeleteUser(username);
+        }
     }
 }

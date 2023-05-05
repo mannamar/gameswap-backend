@@ -174,5 +174,17 @@ namespace gameswap_backend.Services
             }
             return result;
         }
+
+        //Function to soft delete a user so that they disappear from the front end, but there is still a record of them in the database.
+        public bool DeleteUser(string username){
+            UserModel foundUser = GetUserByUserName(username);
+            bool result = false;
+            if(foundUser != null){
+                foundUser.isDeleted = true;
+                _context.Update<UserModel>(foundUser);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace gameswap_backend.Models
         public string? GamePlatform { get; set; }
         public int ReleaseYear { get; set; }
         public string? ImgUrl { get; set; }
-        public string? IgdbId { get; set; }
+        public int IgdbId { get; set; }
         public string? TradeOptions { get; set; }
         public bool isComplete { get; set; }
         public bool isDeleted { get; set; }
