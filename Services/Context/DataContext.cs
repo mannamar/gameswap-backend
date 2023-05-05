@@ -11,6 +11,7 @@ namespace gameswap_backend.Services.Context
     {
         public DbSet<UserModel> UserInfo { get; set; }
         public DbSet<WishListItemModel> WishListItemInfo { get; set; }
+        public DbSet<TradeItemModel> TradeItemInfo { get; set; }
 
         public DataContext(DbContextOptions options): base(options){}
 
