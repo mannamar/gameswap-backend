@@ -35,5 +35,16 @@ namespace gameswap_backend.Services
         public IEnumerable<WishListItemModel> GetWishListItemsByUserId(int userId){
             return _context.WishListItemInfo.Where(item => item.UserId == userId);
         }
+
+        public bool DeleteWishListItem(int Id) {
+            bool result = false;
+            var wishItem = _context.WishListItemInfo.SingleOrDefault(item => item.Id == Id);
+            if (wishItem != null) {
+                wishItem.isDeleted = true;
+                _context.Update<WishListItemModel>(wishItem);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

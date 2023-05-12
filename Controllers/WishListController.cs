@@ -33,5 +33,11 @@ namespace gameswap_backend.Controllers
         public IEnumerable<WishListItemModel> GetWishListItemsByUserId(int userId){
             return _data.GetWishListItemsByUserId(userId);
         }
+
+        [HttpPost]
+        [Route("DeleteWishListItem/{ItemId}")]
+        public bool DeleteWishListItem(int ItemId){
+            return _data.DeleteWishListItem(ItemId);
+        }
     }
 }
