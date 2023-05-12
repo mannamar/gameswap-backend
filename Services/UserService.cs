@@ -186,5 +186,21 @@ namespace gameswap_backend.Services
             }
             return result;
         }
+
+        //Function to retrieve user's information minus some senstitive material, laundered through a DTO
+        public UserInfoDTO GetByUserName(string? username){
+            var UserInformation = new UserInfoDTO();
+            if(DoesUserExist(username)){
+                var foundUser = _context.UserInfo.SingleOrDefault(user => user.Username == username);
+                UserInformation.Id = foundUser.Id;
+                UserInformation.Name = foundUser.Name;
+                UserInformation.Username = foundUser.Username;
+                UserInformation.Email = foundUser.Email;
+                UserInformation.Birthday = foundUser.Birthday;
+                UserInformation.Zipcode = foundUser.Zipcode;
+                UserInformation.CreationTime = foundUser.CreationTime;
+            }
+            return UserInformation;
+        }
     }
 }
