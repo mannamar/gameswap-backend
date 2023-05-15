@@ -33,7 +33,7 @@ namespace gameswap_backend.Services
 
         //function for getting all wish list items by user Id
         public IEnumerable<WishListItemModel> GetWishListItemsByUserId(int userId){
-            return _context.WishListItemInfo.Where(item => item.UserId == userId);
+            return _context.WishListItemInfo.Where(item => (item.UserId == userId && item.isDeleted == false));
         }
 
         public bool DeleteWishListItem(int Id) {
