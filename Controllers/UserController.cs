@@ -18,6 +18,12 @@ namespace gameswap_backend.Controllers
             _data = data;
         }
         
+        [HttpGet]
+        [Route("UserByUsername/{username}")]
+        public UserInfoDTO GetByUserName(string? Username){
+            return _data.GetByUserName(Username);
+        }
+
         //Login user endpoint
         [HttpPost]
         [Route("Login")]
