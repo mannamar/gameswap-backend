@@ -14,9 +14,10 @@ namespace gameswap_backend.Models
         public int ReleaseYear { get; set; }
         public string? ImgUrl { get; set; }
         public int IgdbId { get; set; }
-        public string? TradeOptions { get; set; }
         public bool isComplete { get; set; }
         public bool isDeleted { get; set; }
+        public string? bannerImg { get; set; }
+        public string? allPlatforms { get; set; }
 
         public WishListItemModel(){}
     }

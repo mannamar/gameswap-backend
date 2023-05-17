@@ -24,9 +24,10 @@ namespace gameswap_backend.Services
             newItem.ReleaseYear = NewWishListItem.ReleaseYear;
             newItem.ImgUrl = NewWishListItem.ImgUrl;
             newItem.IgdbId = NewWishListItem.IgdbId;
-            newItem.TradeOptions = NewWishListItem.TradeOptions;
             newItem.isComplete = false;
             newItem.isDeleted = false;
+            newItem.bannerImg = NewWishListItem.bannerImg;
+            newItem.allPlatforms = NewWishListItem.allPlatforms;
             _context.Add(newItem);
             return _context.SaveChanges() != 0;
         }
