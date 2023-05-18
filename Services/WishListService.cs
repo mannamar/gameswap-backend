@@ -22,12 +22,12 @@ namespace gameswap_backend.Services
             newItem.GameName = NewWishListItem.GameName;
             newItem.GamePlatform = NewWishListItem.GamePlatform;
             newItem.ReleaseYear = NewWishListItem.ReleaseYear;
-            newItem.ImgUrl = NewWishListItem.ImgUrl;
+            newItem.CoverUrl = NewWishListItem.CoverUrl;
             newItem.IgdbId = NewWishListItem.IgdbId;
             newItem.isComplete = false;
             newItem.isDeleted = false;
-            newItem.bannerImg = NewWishListItem.bannerImg;
-            newItem.allPlatforms = NewWishListItem.allPlatforms;
+            newItem.BannerUrl = NewWishListItem.BannerUrl;
+            newItem.AllPlatforms = NewWishListItem.AllPlatforms;
             _context.Add(newItem);
             return _context.SaveChanges() != 0;
         }

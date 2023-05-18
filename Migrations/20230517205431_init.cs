@@ -11,6 +11,26 @@ namespace gameswap_backend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "TradeItemInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    GameName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GamePlatform = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseYear = table.Column<int>(type: "int", nullable: false),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IgdbId = table.Column<int>(type: "int", nullable: false),
+                    WishListItemId = table.Column<int>(type: "int", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TradeItemInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserInfo",
                 columns: table => new
                 {
@@ -41,11 +61,12 @@ namespace gameswap_backend.Migrations
                     GameName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GamePlatform = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReleaseYear = table.Column<int>(type: "int", nullable: false),
-                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CoverUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IgdbId = table.Column<int>(type: "int", nullable: false),
-                    TradeOptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isComplete = table.Column<bool>(type: "bit", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    BannerUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AllPlatforms = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,6 +77,9 @@ namespace gameswap_backend.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "TradeItemInfo");
+
             migrationBuilder.DropTable(
                 name: "UserInfo");
 

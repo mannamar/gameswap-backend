@@ -21,6 +21,43 @@ namespace gameswap_backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("gameswap_backend.Models.TradeItemModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("GameName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GamePlatform")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IgdbId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReleaseYear")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WishListItemId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TradeItemInfo");
+                });
+
             modelBuilder.Entity("gameswap_backend.Models.UserModel", b =>
                 {
                     b.Property<int>("Id")
@@ -69,6 +106,15 @@ namespace gameswap_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AllPlatforms")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BannerUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("GameName")
                         .HasColumnType("nvarchar(max)");
 
@@ -78,14 +124,8 @@ namespace gameswap_backend.Migrations
                     b.Property<int>("IgdbId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int");
-
-                    b.Property<string>("TradeOptions")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
