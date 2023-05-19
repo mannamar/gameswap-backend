@@ -15,7 +15,7 @@ namespace gameswap_backend.Services
         }
 
         //function that creates a new wish list item and saves to the database
-        public bool AddWishListItem(WishListItemModel NewWishListItem){
+        public dynamic AddWishListItem(WishListItemModel NewWishListItem){
             WishListItemModel newItem = new WishListItemModel();
             newItem.Id = 0;
             newItem.UserId = NewWishListItem.UserId;
@@ -29,7 +29,8 @@ namespace gameswap_backend.Services
             newItem.BannerUrl = NewWishListItem.BannerUrl;
             newItem.AllPlatforms = NewWishListItem.AllPlatforms;
             _context.Add(newItem);
-            return _context.SaveChanges() != 0;
+            _context.SaveChanges();
+            return newItem.Id;
         }
 
         //function for getting all wish list items by user Id

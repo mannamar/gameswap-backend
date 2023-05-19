@@ -23,7 +23,7 @@ namespace gameswap_backend.Controllers
         //Endpoint for adding a wish list item
         [HttpPost]
         [Route("AddWishListItem")]
-        public bool AddWishListItem(WishListItemModel NewWishListItem){
+        public dynamic AddWishListItem(WishListItemModel NewWishListItem){
             return _data.AddWishListItem(NewWishListItem);
         }
 
