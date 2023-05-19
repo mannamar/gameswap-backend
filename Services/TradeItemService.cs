@@ -33,5 +33,16 @@ namespace gameswap_backend.Services
         public IEnumerable<TradeItemModel> GetTradeItemsByWishId(int wishId){
             return _context.TradeItemInfo.Where(item => (item.WishListItemId == wishId && item.isDeleted == false));
         }
+
+        public bool DeleteTradeItem(int Id) {
+            bool result = false;
+            var tradeItem = _context.TradeItemInfo.SingleOrDefault(item => item.Id == Id);
+            if (tradeItem != null) {
+                tradeItem.isDeleted = true;
+                _context.Update<TradeItemModel>(tradeItem);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }

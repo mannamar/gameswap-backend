@@ -29,5 +29,11 @@ namespace gameswap_backend.Controllers
         public IEnumerable<TradeItemModel> GetTradeItemsByWishId(int wishId){
             return _data.GetTradeItemsByWishId(wishId);
         }
+
+        [HttpPost]
+        [Route("DeleteTradeItem/{ItemId}")]
+        public bool DeleteTradeItem(int ItemId){
+            return _data.DeleteTradeItem(ItemId);
+        }
     }
 }
