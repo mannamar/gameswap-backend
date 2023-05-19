@@ -23,5 +23,11 @@ namespace gameswap_backend.Controllers
         public bool AddTradeItem(TradeItemModel newTradeItem){
             return _data.AddTradeItem(newTradeItem);
         }
+
+        [HttpGet]
+        [Route("GetTradeItemsByWishId/{WishId}")]
+        public IEnumerable<TradeItemModel> GetTradeItemsByWishId(int wishId){
+            return _data.GetTradeItemsByWishId(wishId);
+        }
     }
 }

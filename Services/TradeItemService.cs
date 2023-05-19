@@ -29,5 +29,9 @@ namespace gameswap_backend.Services
             _context.Add(newItem);
             return _context.SaveChanges() != 0;
         }
+
+        public IEnumerable<TradeItemModel> GetTradeItemsByWishId(int wishId){
+            return _context.TradeItemInfo.Where(item => (item.WishListItemId == wishId && item.isDeleted == false));
+        }
     }
 }
