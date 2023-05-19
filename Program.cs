@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<WishListService>();
+builder.Services.AddScoped<TradeItemService>();
 //builder.Services.AddScoped
 
 var connectionString = builder.Configuration.GetConnectionString("GameSwapString");
