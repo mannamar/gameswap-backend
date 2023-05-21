@@ -33,11 +33,11 @@ namespace gameswap_backend.Services
                 foreach (var tradeItem in trades)
                 {
                     // Find who wants those items
-                    var wishMatches = _context.WishListItemInfo.Where(item => (item.IgdbId == tradeItem.IgdbId && item.isDeleted == false)).ToList();
+                    var wishMatches = _context.WishListItemInfo.Where(item => (item.IgdbId == tradeItem.IgdbId && item.GamePlatform == tradeItem.GamePlatform && item.isDeleted == false)).ToList();
                     foreach(var wishMatch in wishMatches)
                     {
                         // Pull out their trades
-                        var tradeMatches = _context.TradeItemInfo.Where(item => (item.WishListItemId == wishMatch.Id && item.isDeleted == false && item.IgdbId == wishItem.IgdbId)).ToList();
+                        var tradeMatches = _context.TradeItemInfo.Where(item => (item.WishListItemId == wishMatch.Id && item.isDeleted == false && item.IgdbId == wishItem.IgdbId && item.GamePlatform == wishItem.GamePlatform)).ToList();
                         // Loop over their trades and see if they have the game you want
                         foreach(var wishTrade in tradeMatches)
                         {
