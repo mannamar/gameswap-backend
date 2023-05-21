@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using gameswap_backend.Models;
+using gameswap_backend.Models.DTO;
 using gameswap_backend.Services.Context;
 
 namespace gameswap_backend.Services
@@ -21,6 +22,7 @@ namespace gameswap_backend.Services
             
             dynamic result = "";
             List<string> myList = new List<string>();
+            List<MatchDTO> matchList = new List<MatchDTO>();
 
             // For each item in the user's wishlist
             foreach (var wishItem in userWishItems)
@@ -31,7 +33,7 @@ namespace gameswap_backend.Services
                 foreach (var tradeItem in trades)
                 {
                     // Find who wants those items
-                    var wishMatches = _context.WishListItemInfo.Where(item => (item.IgdbId == tradeItem.IgdbId)).ToList();
+                    var wishMatches = _context.WishListItemInfo.Where(item => (item.IgdbId == tradeItem.IgdbId && item.isDeleted == false)).ToList();
                     foreach(var wishMatch in wishMatches)
                     {
                         // Pull out their trades
@@ -41,6 +43,19 @@ namespace gameswap_backend.Services
                         {
                             string match = $"Trade with: {wishMatch.UserId}, You give: {tradeItem.GameName}, You get: {wishTrade.GameName};";
                             myList.Add(match);
+
+                            var tradeUser = _context.UserInfo.SingleOrDefault(user => user.Id == wishMatch.UserId);
+                            string tradeUsername = tradeUser.Username;
+                            MatchDTO newMatch = new MatchDTO();
+                            newMatch.TradeWithUserId = wishMatch.UserId;
+                            newMatch.TradeWithUsername = tradeUsername;
+                            newMatch.GiveGameName = tradeItem.GameName;
+                            newMatch.GivePlatform = tradeItem.GamePlatform;
+                            newMatch.GiveCoverImg = tradeItem.ImgUrl;
+                            newMatch.ReceiveGameName = wishTrade.GameName;
+                            newMatch.ReceivePlatform = wishTrade.GamePlatform;
+                            newMatch.ReceiveCoverImg = wishTrade.ImgUrl;
+                            matchList.Add(newMatch);
                         }
                         // result = tradeMatches;
                     }
@@ -48,7 +63,7 @@ namespace gameswap_backend.Services
                     // myList.Add(res);
                 }
             }
-            return myList;
+            return matchList;
         }
     }
 }
