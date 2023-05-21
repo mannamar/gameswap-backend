@@ -30,14 +30,25 @@ namespace gameswap_backend.Services
                 // For each item they would trade
                 foreach (var tradeItem in trades)
                 {
-                    // Find who else wants those item
-                    var matches = _context.WishListItemInfo.Where(item => (item.IgdbId == tradeItem.IgdbId)).ToList();
-                    string res = "Trade Id " + tradeItem.Id + ": " + wishItem.GameName + " - " + tradeItem.GameName;
-                    myList.Add(res);
-                    result = matches;
+                    // Find who wants those items
+                    var wishMatches = _context.WishListItemInfo.Where(item => (item.IgdbId == tradeItem.IgdbId)).ToList();
+                    foreach(var wishMatch in wishMatches)
+                    {
+                        // Pull out their trades
+                        var tradeMatches = _context.TradeItemInfo.Where(item => (item.WishListItemId == wishMatch.Id && item.isDeleted == false && item.IgdbId == wishItem.IgdbId)).ToList();
+                        // Loop over their trades and see if they have the game you want
+                        foreach(var wishTrade in tradeMatches)
+                        {
+                            string match = $"Trade with: {wishMatch.UserId}, You give: {tradeItem.GameName}, You get: {wishTrade.GameName};";
+                            myList.Add(match);
+                        }
+                        // result = tradeMatches;
+                    }
+                    // string res = "Trade Id " + tradeItem.Id + ": " + wishItem.GameName + " - " + tradeItem.GameName;
+                    // myList.Add(res);
                 }
             }
-            return result;
+            return myList;
         }
     }
 }
