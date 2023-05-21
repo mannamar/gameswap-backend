@@ -9,6 +9,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<WishListService>();
 builder.Services.AddScoped<TradeItemService>();
 builder.Services.AddScoped<MatchService>();
+builder.Services.AddScoped<MessageService>();
 //builder.Services.AddScoped
 
 var connectionString = builder.Configuration.GetConnectionString("GameSwapString");
