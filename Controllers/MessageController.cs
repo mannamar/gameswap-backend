@@ -25,6 +25,13 @@ namespace gameswap_backend.Controllers
             return _data.GetAllMsgs2Users(User1Id, User2Id);
         }
 
+        //Find all users that you message with
+        [HttpGet]
+        [Route("GetAllMsgPartners/{UserId}")]
+        public dynamic GetAllMsgPartners(int userId){
+            return _data.GetAllMsgPartners(userId);
+        }
+
         //Send a message to a user endpoint
         [HttpPost]
         [Route("SendMsg")]

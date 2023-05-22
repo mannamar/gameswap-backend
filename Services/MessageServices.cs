@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace gameswap_backend.Services
 {
+    
     public class MessageService : ControllerBase
     {
         private readonly DataContext _context;
@@ -19,6 +20,38 @@ namespace gameswap_backend.Services
         //function that checks the database for all messages sent between two users
         public IEnumerable<MessageModel> GetAllMsgs2Users(int User1Id, int User2Id){
             return _context.MessageInfo.Where(item => ((item.FromUserId == User1Id && item.ToUserId == User2Id) || (item.FromUserId == User2Id && item.ToUserId == User1Id)));
+        }
+
+        public dynamic GetAllMsgPartners(int userId){
+            var allMessagePartners = _context.MessageInfo.Where(item => (item.FromUserId == userId || item.ToUserId == userId)).ToList();
+
+            List<MessagePersonDTO> people = new List<MessagePersonDTO>();
+            foreach (var message in allMessagePartners){
+                if (message.FromUserId != userId){
+                    int searchId = message.FromUserId;
+                    MessagePersonDTO personFound = people.Find(person => person.UserId == searchId);
+                    if (personFound == null){
+                        MessagePersonDTO personToAdd = new MessagePersonDTO
+                        {
+                            UserId = searchId,
+                            Username = message.FromUsername
+                        };
+                        people.Add(personToAdd);
+                    }
+                } else {
+                    int searchId = message.ToUserId;
+                    MessagePersonDTO personFound = people.Find(person => person.UserId == searchId);
+                    if (personFound == null){
+                        MessagePersonDTO personToAdd = new MessagePersonDTO
+                        {
+                            UserId = searchId,
+                            Username = message.FromUsername
+                        };
+                        people.Add(personToAdd);
+                    }
+                }
+            }
+            return people;
         }
 
         //function that creates a new message from the front end input via a DTO and saves to the database.
