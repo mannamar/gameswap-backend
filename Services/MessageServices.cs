@@ -45,7 +45,7 @@ namespace gameswap_backend.Services
                         MessagePersonDTO personToAdd = new MessagePersonDTO
                         {
                             UserId = searchId,
-                            Username = message.FromUsername
+                            Username = message.ToUsername
                         };
                         people.Add(personToAdd);
                     }
