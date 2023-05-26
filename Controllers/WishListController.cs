@@ -39,5 +39,11 @@ namespace gameswap_backend.Controllers
         public bool DeleteWishListItem(int ItemId){
             return _data.DeleteWishListItem(ItemId);
         }
+
+        [HttpPost]
+        [Route("UpdateWishItemPlatform/{ItemId}/{newPlatform}")]
+        public bool UpdateWishItemPlatform(int ItemId, string newPlatform) {
+            return _data.UpdateWishItemPlatform(ItemId, newPlatform);
+        }
     }
 }

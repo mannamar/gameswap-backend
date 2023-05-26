@@ -48,5 +48,16 @@ namespace gameswap_backend.Services
             }
             return result;
         }
+
+        public bool UpdateWishItemPlatform(int Id, string newPlatform) {
+            bool result = false;
+            var wishItem = _context.WishListItemInfo.SingleOrDefault(item => item.Id == Id);
+            if (wishItem != null) {
+                wishItem.GamePlatform = newPlatform;
+                _context.Update<WishListItemModel>(wishItem);
+                result = _context.SaveChanges() != 0;
+            }
+            return result;
+        }
     }
 }
