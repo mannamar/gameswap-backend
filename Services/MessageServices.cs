@@ -23,7 +23,7 @@ namespace gameswap_backend.Services
         }
 
         public dynamic GetAllMsgPartners(int userId){
-            var allMessagePartners = _context.MessageInfo.Where(item => (item.FromUserId == userId || item.ToUserId == userId)).ToList();
+            var allMessagePartners = _context.MessageInfo.Where(item => (item.FromUserId == userId || item.ToUserId == userId)).OrderByDescending(item => item.Id).ToList();
 
             List<MessagePersonDTO> people = new List<MessagePersonDTO>();
             foreach (var message in allMessagePartners){
